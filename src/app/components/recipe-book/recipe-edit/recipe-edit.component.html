@@ -1,0 +1,139 @@
+<div class="row">
+  <div class="col-xs-12">
+
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button 
+            style="margin-top: 15px"
+            [disabled]="!recipeForm.valid"
+            type="submit" 
+            class="btn btn-success">
+              Save
+        </button>
+          <button 
+            style="margin-top: 15px" 
+            type="button" 
+            class="btn btn-danger"
+            (click)="onCancel()">
+              Cancel
+        </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input 
+              formControlName="name"
+              type="text" 
+              id="name"
+              class="form-control"
+            >
+          </div>
+          <span 
+          *ngIf="!recipeForm.get('name').valid && recipeForm.get('name').touched"
+          class="help-block">Name invalid!</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="imagePath">Image Path</label>
+            <input 
+              formControlName="imagePath"
+              type="text" 
+              id="imagePath"
+              class="form-control"
+              #imagePath
+            >
+          </div>
+          <span 
+          *ngIf="!recipeForm.get('imagePath').valid && recipeForm.get('imagePath').touched"
+          class="help-block">Image Path invalid!</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <img [src]="imagePath.value" class="img-responsive">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea 
+              formControlName="description"
+              type="text" 
+              id="description"
+              class="form-control"
+              rows="6"
+            ></textarea>
+          </div>
+          <span 
+          *ngIf="!recipeForm.get('description').valid && recipeForm.get('description').touched"
+          class="help-block">Description invalid!</span>
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="col-xs-12">
+            <div 
+              class="form-group" 
+              formArrayName="ingredients">
+              <div 
+                class="row" 
+                *ngFor="let ingredientConrtol of recipeForm.get('ingredients').controls; let i=index"
+                [formGroupName]="i"
+                style="margin-top: 15px">
+                <div class="col-xs-8">
+                    <input 
+                      formControlName="name"
+                      type="text" 
+                      class="form-control"
+                    >
+                </div>
+                <div class="col-xs-2">
+                    <input
+                      formControlName="amount" 
+                      pattern
+                      type="number" 
+                      class="form-control"
+                    >
+                </div>
+                <div class="col-xs-2">
+                    <button 
+                      type="button"
+                      (click)="onDeleteIngrItem(i)" 
+                      class="btn btn-danger">
+                        X
+                  </button>
+                </div>
+              </div>
+              <span
+                *ngIf="!recipeForm.get('ingredients').valid && recipeForm.get('ingredients').touched"
+                class="help-block"> 
+                    ingredient name and value invalid!
+              </span>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <button 
+                  [disabled]="!recipeForm.get('ingredients').valid"
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="onAddIngr()">
+                    Add Ingredient
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </form>
+  </div>
+</div>
