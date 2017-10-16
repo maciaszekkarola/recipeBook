@@ -13,10 +13,10 @@ import unsubscriber from '../../../shared/unsubscriber';
 export class ShoppingListEditComponent implements OnInit, OnDestroy {
   @ViewChild('form') slForm: NgForm;
   private subscriptions: Subscription[] = [];
-  private editMode = false;
-  private editedItemIndex: number;
-  private editedItem: Ingredient;
-  private ingrArr = [];
+  editMode = false;
+  editedItemIndex: number;
+  editedItem: Ingredient;
+  ingrArr = [];
 
   constructor(private shoppingListService: ShoppingListService) { }
 

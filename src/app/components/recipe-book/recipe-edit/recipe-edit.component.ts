@@ -11,9 +11,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipe-edit.component.css']
 })
 export class RecipeEditComponent implements OnInit {
-  private id: number;
-  private editMode = false;
-  private recipeForm: FormGroup;
+  id: number;
+  editMode = false;
+  recipeForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
               private recipeService: RecipeService,

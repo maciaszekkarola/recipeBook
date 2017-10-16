@@ -10,7 +10,7 @@ import unsubscriber from '../../shared/unsubscriber';
   styleUrls: ['./shopping-list.component.css']
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
-  private ingredients: Ingredient[];
+  ingredients: Ingredient[];
   private subscriptions: Subscription[] = [];
 
   constructor(private shoppingListService: ShoppingListService) { }

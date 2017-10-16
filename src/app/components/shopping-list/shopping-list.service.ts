@@ -11,13 +11,11 @@ export class ShoppingListService {
         new Ingredient('Bread', 1)
     ];
 
-    // test
     setIngredients(ingredients: Ingredient[]) {
         this.ingredients = ingredients;
         this.ingrChanged.next(this.ingredients.slice());
     }
 
-    // 
 
     getIngredients() {
         return this.ingredients.slice();
@@ -31,7 +29,6 @@ export class ShoppingListService {
         this.ingrChanged.next(this.ingredients.slice());
     }
     
-    // typ ingr[] - bo na jedeno danie sklada sie wiele skladnikow
     addIngredientsToList(ingredient: Ingredient[]) {
         this.ingredients.push(...ingredient);
         this.ingrChanged.next(this.ingredients.slice());
