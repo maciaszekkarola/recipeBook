@@ -17,6 +17,8 @@ import { DataStorageService } from './shared/data-storage.service';
 import { RecipeService } from './components/recipe-book/recipe-book.service';
 import { AuthGuard } from './components/auth/auth-guard.service';
 import { HomeComponent } from './components/home/home.component';
+import { StoreModule } from '@ngrx/store';
+import { shoppingListReducer } from 'app/components/shopping-list/store/shopping-list.reducers';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { HomeComponent } from './components/home/home.component';
     AppRoutingModule,
     ShoppingModule,
     AuthModule,
-    SharedModule
+    SharedModule,
+    StoreModule.forRoot({shoppingList: shoppingListReducer}),
+    
   ],
   providers: [
     ShoppingListService, 
