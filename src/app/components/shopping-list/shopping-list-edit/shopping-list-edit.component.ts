@@ -48,8 +48,12 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
     const value = form.value;
     const newIngredient = new Ingredient(value.name, value.amount);
 
+    // w tym dispatchu przekazuję jako argument obiekt więc musze odnieść się do kluczy
+    // które zdefinowalam w shopping-list.actions
     if (this.editMode) {
-      this.shoppingListService.updateIngr(this.editedItemIndex, newIngredient);
+      this.store.dispatch(new ShoppingListActions.UpdateIngredient({
+        index: this.editedItemIndex, 
+        ingredient: newIngredient}));
     }else {
       // tworzę nową instancję akcji, wywołuję klasę AddIngredient
       // w klasie przekazuję nowy Ingredient który zdefiniowałam wyżej
@@ -65,7 +69,7 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
-    this.shoppingListService.deleteIngr(this.editedItemIndex);
+    this.store.dispatch(new ShoppingListActions.DeleteIngredient(this.editedItemIndex))
     this.onClear();
   }
 

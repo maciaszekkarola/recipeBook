@@ -19,10 +19,8 @@ export class DataStorageService {
                 private slService: ShoppingListService,
                 private authService: AuthService) {} 
 
-    
+        // poniewaz w metodzie put nie oczekuję zadnej odpowiedzi, pomijam responseType;
 
-    // poniewaz w metodzie put nie oczekuję zadnej odpowiedzi, pomijam responseType;
-    storeRecipes() {
         // const token = this.authService.getToken();
         // return this.http.put(`${url}recipes.json`, 
         // this.recipeService.getRecipes(), {
@@ -32,6 +30,7 @@ export class DataStorageService {
         //     params: new HttpParams().set('auth', token) 
         // });
 
+    storeRecipes() {
         // DRUGA METODA POBIERANIA DANYCH I ZAPISYWANIA ICH NA SERWERZE
         const req = new HttpRequest(
                 'PUT', 
@@ -42,8 +41,6 @@ export class DataStorageService {
             return this.http.request(req);
     }
 
-
-    fetchRecipes() {
     //    przez to że dodaję po get typ danych jakiego się spodziewam
     //  nie musze nic precyzowąć wewnątrz funkcji i mogę pozbyć się 
     // Response, nei musze też przepisywać nic na json żeby otworzyć dane
@@ -56,7 +53,8 @@ export class DataStorageService {
         // zdeklarować typ<Recipe[]> jesli ide w 'text' to pomijam ten krok,
         //  ale dane jakie dostaję sa nieczytelne
         // observe: 'body', 'response'. responseType: 'text', 'json' i wiele innych. defaultowo jest body i json
-        
+
+    fetchRecipes() {
         return this.http.get<Recipe[]>(`${url}recipes.json`, {
             observe: 'body', 
             responseType: 'json'
