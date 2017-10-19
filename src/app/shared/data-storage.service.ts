@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/Rx';
 
@@ -23,19 +23,27 @@ export class DataStorageService {
 
     // poniewaz w metodzie put nie oczekuję zadnej odpowiedzi, pomijam responseType;
     storeRecipes() {
-        const token = this.authService.getToken();
-        return this.http.put(`${url}recipes.json`, 
-        this.recipeService.getRecipes(), {
-            observe: 'body',
-            // tutaj pobieram token i wpisuję params, wczesniej byl od dadany do url
-            // recipes.json?=auth+token
-            params: new HttpParams().set('auth', token) 
-        });
+        // const token = this.authService.getToken();
+        // return this.http.put(`${url}recipes.json`, 
+        // this.recipeService.getRecipes(), {
+        //     observe: 'body',
+        //     // tutaj pobieram token i wpisuję params, wczesniej byl od dadany do url
+        //     // recipes.json?=auth+token
+        //     params: new HttpParams().set('auth', token) 
+        // });
+
+        // DRUGA METODA POBIERANIA DANYCH I ZAPISYWANIA ICH NA SERWERZE
+        const req = new HttpRequest(
+                'PUT', 
+                `${url}recipes.json`, 
+                this.recipeService.getRecipes(), 
+                {reportProgress: true}
+            );
+            return this.http.request(req);
     }
 
+
     fetchRecipes() {
-       const token = this.authService.getToken();
-        
     //    przez to że dodaję po get typ danych jakiego się spodziewam
     //  nie musze nic precyzowąć wewnątrz funkcji i mogę pozbyć się 
     // Response, nei musze też przepisywać nic na json żeby otworzyć dane
@@ -48,7 +56,8 @@ export class DataStorageService {
         // zdeklarować typ<Recipe[]> jesli ide w 'text' to pomijam ten krok,
         //  ale dane jakie dostaję sa nieczytelne
         // observe: 'body', 'response'. responseType: 'text', 'json' i wiele innych. defaultowo jest body i json
-        return this.http.get<Recipe[]>(`${url}recipes.json?auth=${token}`, {
+        
+        return this.http.get<Recipe[]>(`${url}recipes.json`, {
             observe: 'body', 
             responseType: 'json'
         })
@@ -70,15 +79,17 @@ export class DataStorageService {
     }
 
     storeShopingList() {
-        const token = this.authService.getToken()
-        return this.http.put(`${url}shoppingList.json?auth=${token}`, 
-        0 
-    );
+    const req = new HttpRequest(
+            'PUT', 
+            `${url}shoppingList.json`, 
+            this.slService.getIngredients(), 
+            {reportProgress: true}
+        );
+        return this.http.request(req);
     }
 
     fetchShoppingList() {
-        const token = this.authService.getToken(); 
-        return this.http.get<Ingredient[]>(`${url}shoppingList.json?auth=${token}`, {
+        return this.http.get<Ingredient[]>(`${url}shoppingList.json`, {
             observe: 'body',
             responseType: 'json'
         })

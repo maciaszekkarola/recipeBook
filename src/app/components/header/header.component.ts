@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
       );
     this.dataStorageService.storeShopingList()
       .subscribe(
-        (response: Response) => {
+        (response) => {
           console.log(response);
         }
       );  
