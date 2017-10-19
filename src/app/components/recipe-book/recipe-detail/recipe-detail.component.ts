@@ -1,9 +1,9 @@
-import { Ingredient } from './../../../models/ingredient.model';
 import { Store } from '@ngrx/store';
 import { AuthService } from './../../auth/auth.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import * as ShoppingListActions from './../../shopping-list/store/shopping-list.actions';
+import * as fromShoppingListReducer from '../../shopping-list/store/shopping-list.reducers';
 
 import { Recipe } from '../../../models/recipe.model';
 import { RecipeService } from '../../recipe-book/recipe-book.service';
@@ -18,7 +18,7 @@ export class RecipeDetailComponent implements OnInit{
     id:  number;
 
     constructor (
-                private store: Store<{shoppingList: {ingredients: Ingredient[]}}>,
+                private store: Store<fromShoppingListReducer.AppState>,
                 private recipeService: RecipeService,
                 private authService: AuthService,
                 private route: ActivatedRoute, 
@@ -36,7 +36,6 @@ export class RecipeDetailComponent implements OnInit{
     }
 
     onAddToShoppingList() {
-        // this.recipeService.addIngrToShoppingList(this.recipe.ingredients);
         this.store.dispatch(new ShoppingListActions.AddIngredients(this.recipe.ingredients))
 
     }
