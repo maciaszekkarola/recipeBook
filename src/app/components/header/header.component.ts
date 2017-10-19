@@ -2,7 +2,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from './../auth/auth.service';
 import { ShoppingListService } from './../shopping-list/shopping-list.service';
 import { RecipeService } from './../recipe-book/recipe-book.service';
-import { Response } from '@angular/http';
 import { DataStorageService } from './../../shared/data-storage.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -27,7 +26,7 @@ export class HeaderComponent implements OnInit {
   onSaveData() {
     this.dataStorageService.storeRecipes()
       .subscribe(
-        (response: Response) => {
+        (response) => {
           console.log(response);
         }
       );
