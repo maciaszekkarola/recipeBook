@@ -1,9 +1,11 @@
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Ingredient } from '../../../models/ingredient.model';
 import {  ShoppingListService } from '../shopping-list.service';
 import unsubscriber from '../../../shared/unsubscriber';
+import * as ShoppingListActions from '../store/shopping-list.actions';
 
 @Component({
   selector: 'app-shopping-list-edit',
@@ -18,7 +20,8 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
   editedItem: Ingredient;
   ingrArr = [];
 
-  constructor(private shoppingListService: ShoppingListService) { }
+  constructor(private shoppingListService: ShoppingListService,
+              private store: Store<{shoppingList: {ingredients: Ingredient[]}}>) { }
 
   ngOnInit() {
     this.subscriptions.push(
@@ -48,7 +51,9 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
     if (this.editMode) {
       this.shoppingListService.updateIngr(this.editedItemIndex, newIngredient);
     }else {
-      this.shoppingListService.addIngredient(newIngredient);
+      // tworzę nową instancję akcji, wywołuję klasę AddIngredient
+      // w klasie przekazuję nowy Ingredient który zdefiniowałam wyżej
+      this.store.dispatch(new ShoppingListActions.AddIngredient(newIngredient));
     }
     this.editMode = false;
     form.reset();

@@ -9,7 +9,11 @@ export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 //  tez payload jeśli coś wysyła 
 export class AddIngredient implements Action {
     readonly type = ADD_INGREDIENT;
-    payload: Ingredient;
+
+    constructor(public payload: Ingredient) {};
+    
 }
 
+// przy impotowaniu w komponencie powołuję się na typ
+// import * as ShoppingListActions from ......
 export type ShoppingListActions = AddIngredient;
