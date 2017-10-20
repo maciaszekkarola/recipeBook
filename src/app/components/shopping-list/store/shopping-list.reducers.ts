@@ -3,14 +3,10 @@ import { Action } from '@ngrx/store';
 import * as ShoppingListActions from 'app/components/shopping-list/store/shopping-list.actions';
 
 
-// tworzę dwa nowe interfejcy AppState i State po to by za każdym razem kiedy 
+// tworzę State po to by za każdym razem kiedy 
 // wpisuję w constructor w komponencie nie musieć pisać tej długiej nazwy, tylko 
 // by odwoływać sie po typac
 // private store: Store<fromShoppingListReducer.AppState>) { }
-
-// export interface AppState {
-//     shoppingList: State;
-// }
 
 export interface State {
     ingredients: Ingredient[];

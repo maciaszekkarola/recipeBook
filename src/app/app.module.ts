@@ -19,9 +19,8 @@ import { RecipeService } from './components/recipe-book/recipe-book.service';
 import { AuthGuard } from './components/auth/auth-guard.service';
 import { HomeComponent } from './components/home/home.component';
 import { StoreModule } from '@ngrx/store';
-import { shoppingListReducer } from 'app/components/shopping-list/store/shopping-list.reducers';
 import { AuthInterceptor } from './shared/auth.interceptor';
-import { authReducer } from 'app/components/auth/store/auth.reducers';
+import { reducers } from './store/app.reducers';
 
 @NgModule({
   declarations: [
@@ -36,11 +35,7 @@ import { authReducer } from 'app/components/auth/store/auth.reducers';
     ShoppingModule,
     AuthModule,
     SharedModule,
-    StoreModule.forRoot({
-      shoppingList: shoppingListReducer,
-      auth: authReducer
-      }),
-    
+    StoreModule.forRoot(reducers),
   ],
   providers: [
     RecipeService, 

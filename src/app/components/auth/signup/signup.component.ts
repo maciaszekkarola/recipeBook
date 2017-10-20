@@ -17,7 +17,7 @@ export class SignupComponent implements OnInit {
               private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
-  }
+  } 
 
   onSignup(form: NgForm) {
     const email = form.value.email;
