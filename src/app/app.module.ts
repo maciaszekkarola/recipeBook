@@ -1,4 +1,4 @@
-import { LoggingInterceptor } from './shared/logging.interceptor';
+
 import { AuthModule } from './components/auth/auth.module';
 import { ShoppingModule } from './components/shopping-list/shopping.module';
 import { SharedModule } from './shared/shared.module';
@@ -12,15 +12,18 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
+import { HomeComponent } from './components/home/home.component';
 
 import { AuthService } from './components/auth/auth.service';
 import { DataStorageService } from './shared/data-storage.service';
 import { RecipeService } from './components/recipe-book/recipe-book.service';
 import { AuthGuard } from './components/auth/auth-guard.service';
-import { HomeComponent } from './components/home/home.component';
 import { StoreModule } from '@ngrx/store';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { reducers } from './store/app.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './components/auth/store/auth.effects';
+import { LoggingInterceptor } from './shared/logging.interceptor';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,8 @@ import { reducers } from './store/app.reducers';
     AuthModule,
     SharedModule,
     StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([AuthEffects])
+    
   ],
   providers: [
     RecipeService, 

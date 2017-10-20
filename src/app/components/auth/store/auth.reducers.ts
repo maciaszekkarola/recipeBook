@@ -4,21 +4,21 @@ import * as AuthActions from './auth.actions';
 export interface State {
     token: string;
     authenticated: boolean;
-    email: string;
+    username: string;
     password: string;
 }
 
 const initialState: State = {
     token: null,
     authenticated: false,
-    email: null,
+    username: null,
     password: null
 }
 
 // w tym przypadku z racji ze czynnosc autektykacji jest powtarzalna moge wrzucic case pod case
 export function authReducer(state = initialState, action: AuthActions.AuthActions) {
     switch (action.type) {
-
+        
         case AuthActions.SIGNUP:
         case AuthActions.SIGNIN:
             return {
