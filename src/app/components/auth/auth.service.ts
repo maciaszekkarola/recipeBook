@@ -17,12 +17,18 @@ export class AuthService {
         .then(
             user => {
                 this.store.dispatch(new AuthActions.Signup());
+                firebase.auth().currentUser.getToken()
+                    .then(
+                        (token: string) => {
+                        this.store.dispatch(new AuthActions.SetToken(token))
+                        }
+                    );
                 this.router.navigate( ['../recipes/0'] , {relativeTo: this.route});
             }
         )
-            .catch(
-                error => console.log(error)
-            );
+        .catch(
+            error => console.log(error)
+        );
 
     }
 
@@ -31,30 +37,19 @@ export class AuthService {
             .then(
                 response => {
                     this.store.dispatch(new AuthActions.Signin());
-                    this.router.navigate( ['../recipes/0'] , {relativeTo: this.route});
                     firebase.auth().currentUser.getToken()
                         .then(
-                            (token: string) => 
+                            (token: string) => {
                             this.store.dispatch(new AuthActions.SetToken(token))
+                            }
                         );
+                    this.router.navigate( ['../recipes/0'] , {relativeTo: this.route});    
                 }
             )
             .catch(
                 error => console.log(error.message)
             );
     }
-
-    // getToken() {
-    //     firebase.auth().currentUser.getToken()
-    //         .then(
-    //             (token: string) => this.token = token
-    //     );
-    //     return this.token;
-    // }
-
-    // isAuthenticated() {
-    //     return this.token != null;
-    // }
 
     logout() {
         firebase.auth().signOut();

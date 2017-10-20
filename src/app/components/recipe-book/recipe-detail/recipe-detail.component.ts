@@ -16,7 +16,7 @@ import { RecipeService } from '../../recipe-book/recipe-book.service';
 export class RecipeDetailComponent implements OnInit {
     recipe: Recipe;
     id:  number;
-
+    
     constructor (
                 private store: Store<fromApp.AppState>,
                 private recipeService: RecipeService,
@@ -33,6 +33,8 @@ export class RecipeDetailComponent implements OnInit {
                     
                 }
             );
+
+
     }
 
     onAddToShoppingList() {
@@ -40,12 +42,13 @@ export class RecipeDetailComponent implements OnInit {
 
     }
     onEditRecipe() {
-        if (this.authService.isAuthenticated()) {
+        // tutaj przyklad jak w headerze, dodaj observable 
+        // if (this.authService.isAuthenticated()) {
         this.router.navigate(['edit'], {relativeTo: this.route})
-        }else {
-            this.router.navigate(['/signin'], {relativeTo: this.route});
+        // }else {
+            // this.router.navigate(['/signin'], {relativeTo: this.route});
             
-        }
+        // }
     }
 
     onDeleteRecipe() {

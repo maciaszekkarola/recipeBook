@@ -35,11 +35,11 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   }
   
   onNewRecipe() {
-    if (this.authService.isAuthenticated()) {
+    // if (this.authService.isAuthenticated()) {
       this.router.navigate(['new'], {relativeTo: this.route});
-    }else {
-      this.router.navigate(['../signin'], {relativeTo: this.route});
-    }
+    // }else {
+      // this.router.navigate(['../signin'], {relativeTo: this.route});
+    // }
   }
 
   
