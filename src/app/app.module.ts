@@ -13,7 +13,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 
-import { ShoppingListService } from './components/shopping-list/shopping-list.service';
 import { AuthService } from './components/auth/auth.service';
 import { DataStorageService } from './shared/data-storage.service';
 import { RecipeService } from './components/recipe-book/recipe-book.service';
@@ -40,7 +39,6 @@ import { AuthInterceptor } from './shared/auth.interceptor';
     
   ],
   providers: [
-    ShoppingListService, 
     RecipeService, 
     DataStorageService,
     AuthService, 

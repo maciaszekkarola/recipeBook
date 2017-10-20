@@ -1,6 +1,5 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from './../auth/auth.service';
-import { ShoppingListService } from './../shopping-list/shopping-list.service';
 import { RecipeService } from './../recipe-book/recipe-book.service';
 import { DataStorageService } from './../../shared/data-storage.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,7 +13,6 @@ export class HeaderComponent implements OnInit {
 
   constructor(private dataStorageService: DataStorageService,
               private recipeService: RecipeService, 
-              private slService: ShoppingListService,
               private authService: AuthService,
               private router: Router,
               private route: ActivatedRoute
@@ -30,12 +28,12 @@ export class HeaderComponent implements OnInit {
           console.log(response);
         }
       );
-    this.dataStorageService.storeShopingList()
-      .subscribe(
-        (response) => {
-          console.log(response);
-        }
-      );  
+    // this.dataStorageService.storeShopingList()
+    //   .subscribe(
+    //     (response) => {
+    //       console.log(response);
+    //     }
+    //   );  
   }
 
   onFetchData() {

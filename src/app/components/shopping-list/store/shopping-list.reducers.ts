@@ -25,7 +25,7 @@ const initialState: State = {
         new Ingredient('Bread', 1)
     ],
     editedIngredient: null,
-    editedIngredientIndex: null,
+    editedIngredientIndex: -1,
 };
 
 export function shoppingListReducer(state = initialState, action: ShoppingListActions.ShoppingListActions) {
@@ -44,13 +44,13 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
             };  
 
         case ShoppingListActions.UPDATE_INGREDIENTS:
-            const ingredient = state.ingredients[action.payload.index];
+            const ingredient = state.ingredients[state.editedIngredientIndex];
             const updatedIngredient = {
                 ...ingredient,
                 ...action.payload.ingredient
             };
             const ingredients = [...state.ingredients];
-            ingredients[action.payload.index] = updatedIngredient;
+            ingredients[state.editedIngredientIndex] = updatedIngredient;
             return {
                 ...state,
                 ingredients: ingredients
@@ -59,7 +59,7 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
         case ShoppingListActions.DELETE_INGREDIENTS:
         // znowu pobieram stan ingredients, wycinam z nich element i zwracam tablicę
             const Ingredients = [...state.ingredients];
-            Ingredients.splice(action.payload, 1);
+            Ingredients.splice(state.editedIngredientIndex, 1);
         
             return {
                 ...state,

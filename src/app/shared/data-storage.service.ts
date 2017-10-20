@@ -6,7 +6,6 @@ import { AuthService } from './../components/auth/auth.service';
 import { Ingredient } from './../models/ingredient.model';
 import { Recipe } from './../models/recipe.model';
 import { RecipeService } from './../components/recipe-book/recipe-book.service';
-import { ShoppingListService } from 'app/components/shopping-list/shopping-list.service';
 
 const url = 'https://recipe-book-c850b.firebaseio.com/';
 
@@ -16,7 +15,6 @@ export class DataStorageService {
     
     constructor(private http: HttpClient,
                 private recipeService: RecipeService,
-                private slService: ShoppingListService,
                 private authService: AuthService) {} 
 
         // poniewaz w metodzie put nie oczekuję zadnej odpowiedzi, pomijam responseType;
@@ -77,30 +75,30 @@ export class DataStorageService {
     }
 
     storeShopingList() {
-    const req = new HttpRequest(
-            'PUT', 
-            `${url}shoppingList.json`, 
-            this.slService.getIngredients(), 
-            {reportProgress: true}
-        );
-        return this.http.request(req);
+    // const req = new HttpRequest(
+    //         'PUT', 
+    //         `${url}shoppingList.json`, 
+    //         this.slService.getIngredients(), 
+    //         {reportProgress: true}
+    //     );
+    //     return this.http.request(req);
     }
 
     fetchShoppingList() {
-        return this.http.get<Ingredient[]>(`${url}shoppingList.json`, {
-            observe: 'body',
-            responseType: 'json'
-        })
-            .map(
-                (ingredients) => {
-                    return ingredients;
-                }
-            )
-            .subscribe(
-                (ingredients: Ingredient[]) => {
-                    this.slService.setIngredients(ingredients);
-                }
-            );
+        // return this.http.get<Ingredient[]>(`${url}shoppingList.json`, {
+        //     observe: 'body',
+        //     responseType: 'json'
+        // })
+        //     .map(
+        //         (ingredients) => {
+        //             return ingredients;
+        //         }
+        //     )
+        //     .subscribe(
+        //         (ingredients: Ingredient[]) => {
+        //             this.slService.setIngredients(ingredients);
+        //         }
+        //     );
     }
 
 }
