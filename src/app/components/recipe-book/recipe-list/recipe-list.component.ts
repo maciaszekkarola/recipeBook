@@ -1,4 +1,3 @@
-import { AuthService } from './../../auth/auth.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -17,8 +16,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   constructor(private recipeService: RecipeService,
               private router: Router,
-              private route: ActivatedRoute,
-              private authService: AuthService) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.subscriptions.push(this.recipeService.recipesChanged

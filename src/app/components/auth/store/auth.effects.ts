@@ -31,7 +31,7 @@ export class AuthEffects {
             .auth().currentUser.getIdToken());
     })
     .mergeMap((token: string) => {
-        this.router.navigate( ['../recipes/0'] , {relativeTo: this.route})
+        this.router.navigate( ['/'] , {relativeTo: this.route})
         return [
             {type: AuthActions.SIGNUP},
             {
@@ -56,7 +56,7 @@ export class AuthEffects {
             .auth().currentUser.getIdToken());
     })
     .mergeMap((token: string) => {
-        this.router.navigate( ['../recipes/0'] , {relativeTo: this.route})
+        this.router.navigate( ['/'] , {relativeTo: this.route})
         return [
             {type: AuthActions.SIGNIN},
             {

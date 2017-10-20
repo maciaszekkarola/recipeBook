@@ -14,7 +14,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 
-import { AuthService } from './components/auth/auth.service';
 import { DataStorageService } from './shared/data-storage.service';
 import { RecipeService } from './components/recipe-book/recipe-book.service';
 import { AuthGuard } from './components/auth/auth-guard.service';
@@ -45,7 +44,6 @@ import { LoggingInterceptor } from './shared/logging.interceptor';
   providers: [
     RecipeService, 
     DataStorageService,
-    AuthService, 
     AuthGuard,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true}

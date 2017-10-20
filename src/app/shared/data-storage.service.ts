@@ -2,7 +2,6 @@ import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/Rx';
 
-import { AuthService } from './../components/auth/auth.service';
 import { Ingredient } from './../models/ingredient.model';
 import { Recipe } from './../models/recipe.model';
 import { RecipeService } from './../components/recipe-book/recipe-book.service';
@@ -14,8 +13,7 @@ const url = 'https://recipe-book-c850b.firebaseio.com/';
 export class DataStorageService {
     
     constructor(private http: HttpClient,
-                private recipeService: RecipeService,
-                private authService: AuthService) {} 
+                private recipeService: RecipeService) {} 
 
         // poniewaz w metodzie put nie oczekuję zadnej odpowiedzi, pomijam responseType;
 
