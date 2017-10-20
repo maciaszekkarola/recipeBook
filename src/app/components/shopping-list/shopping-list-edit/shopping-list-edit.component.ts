@@ -48,18 +48,19 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
     unsubscriber(this.subscriptions);
    }
 
-  onSubmit(form: NgForm) {
+
     // zbieram dane z formularza i tworzę z nich nowy obiekt 
+        // w tym dispatchu przekazuję jako argument obiekt więc musze odnieść się do kluczy
+    // które zdefinowalam w shopping-list.actions
+      // ELSE = tworzę nową instancję akcji, wywołuję klasę AddIngredient
+      // w klasie przekazuję nowy Ingredient który zdefiniowałam wyżej
+
+  onSubmit(form: NgForm) {
     const value = form.value;
     const newIngredient = new Ingredient(value.name, value.amount);
-
-    // w tym dispatchu przekazuję jako argument obiekt więc musze odnieść się do kluczy
-    // które zdefinowalam w shopping-list.actions
     if (this.editMode) {
       this.store.dispatch(new ShoppingListActions.UpdateIngredient({ingredient: newIngredient}));
     }else {
-      // tworzę nową instancję akcji, wywołuję klasę AddIngredient
-      // w klasie przekazuję nowy Ingredient który zdefiniowałam wyżej
       this.store.dispatch(new ShoppingListActions.AddIngredient(newIngredient));
     }
     this.editMode = false;

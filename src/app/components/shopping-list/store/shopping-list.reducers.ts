@@ -43,6 +43,7 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
                 ingredients: [...state.ingredients, ...action.payload]
             };  
 
+            // w przypadku manipulacji danymi musze zresetowac stan ingredient i index, poniewaz jest blad, to samo w delete_ingredients
         case ShoppingListActions.UPDATE_INGREDIENTS:
             const ingredient = state.ingredients[state.editedIngredientIndex];
             const updatedIngredient = {
@@ -53,7 +54,9 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
             ingredients[state.editedIngredientIndex] = updatedIngredient;
             return {
                 ...state,
-                ingredients: ingredients
+                ingredients: ingredients,
+                editedIngredient: null,
+                editedIngredientIndex: -1
             };  
 
         case ShoppingListActions.DELETE_INGREDIENTS:
@@ -63,11 +66,14 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
         
             return {
                 ...state,
-                ingredients: Ingredients
+                ingredients: Ingredients,
+                editedIngredient: null,
+                editedIngredientIndex: -1
             }; 
         
-            // action.payload jest indexem tablicy ingredients
-            // nie jest obiektem wiec nie ma klucza w postaci index:number, jest tylko number
+            // tslint:disable-next-line:max-line-length
+            // action.payload jest indexem tablicy ingredients nie  jest obiektem wiec nie ma klucza w postaci index:number, jest tylko number 
+             
         case ShoppingListActions.START_EDIT:
         const editedIngredient = {...state.ingredients[action.payload]}
             return {
