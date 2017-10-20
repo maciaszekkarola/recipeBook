@@ -6,6 +6,7 @@ export const ADD_INGREDIENTS = 'ADD_INGREDIENTS';
 export const UPDATE_INGREDIENTS = 'UPDATE_INGREDIENTS';
 export const DELETE_INGREDIENTS = 'DELETE_INGREDIENTS';
 export const START_EDIT = 'START_EDIT';
+export const STOP_EDIT = 'STOP_EDIT';
 
 // tutaj definiuję jakie rodzaje wlasciwosci(properties) bedzie miala 
 // Action z reducerów, może mieć tylko type, ale może mieć
@@ -35,6 +36,9 @@ export class StartEdit implements Action {
     constructor(public payload: number) {};
 }
 
+export class StopEdit implements Action {
+    readonly type = STOP_EDIT;
+}
 
 // przy impotowaniu w komponencie powołuję się na typ
 // import * as ShoppingListActions from ......
@@ -43,4 +47,5 @@ export type ShoppingListActions =
     AddIngredients|
     UpdateIngredient|
     DeleteIngredient|
-    StartEdit;
+    StartEdit|
+    StopEdit;

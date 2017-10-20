@@ -3,12 +3,11 @@ import { Subscription } from 'rxjs/Subscription';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 
-import { AppState } from './../store/shopping-list.reducers';
 import { AddIngredients } from './../store/shopping-list.actions';
-import * as ShoppingListActions from '../store/shopping-list.actions';
-import * as fromShoppingListReducer from '../store/shopping-list.reducers';
 import { Ingredient } from '../../../models/ingredient.model';
 import unsubscriber from '../../../shared/unsubscriber';
+import * as fromApp from '../../../store/app.reducers';
+import * as ShoppingListActions from '../store/shopping-list.actions';
 
 @Component({
   selector: 'app-shopping-list-edit',
@@ -22,7 +21,7 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
   editedItem: Ingredient;
   ingrArr = [];
 
-  constructor(private store: Store<fromShoppingListReducer.AppState>) { }
+  constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
     this.subscriptions.push(this.store.select('shoppingList')
@@ -44,9 +43,6 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy() {
-    unsubscriber(this.subscriptions);
-   }
 
 
     // zbieram dane z formularza i tworzę z nich nowy obiekt 
@@ -60,6 +56,7 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
     const newIngredient = new Ingredient(value.name, value.amount);
     if (this.editMode) {
       this.store.dispatch(new ShoppingListActions.UpdateIngredient({ingredient: newIngredient}));
+      
     }else {
       this.store.dispatch(new ShoppingListActions.AddIngredient(newIngredient));
     }
@@ -76,5 +73,14 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
     this.store.dispatch(new ShoppingListActions.DeleteIngredient());
     this.onClear();
   }
+
+  // w przypadku opusczenia strony podczas edytowani amusze zresetowac (ustawic na null) 
+// a wszystko po to by wybrany ingredient po opuszczeniu strony nie pozostal w "tle"
+  // editedIngredient: null,
+  // editedIngredientIndex: -1
+  ngOnDestroy() {
+    this.store.dispatch(new ShoppingListActions.StopEdit());
+    unsubscriber(this.subscriptions);
+   }
 
 }

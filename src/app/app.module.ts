@@ -21,6 +21,7 @@ import { HomeComponent } from './components/home/home.component';
 import { StoreModule } from '@ngrx/store';
 import { shoppingListReducer } from 'app/components/shopping-list/store/shopping-list.reducers';
 import { AuthInterceptor } from './shared/auth.interceptor';
+import { authReducer } from 'app/components/auth/store/auth.reducers';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,10 @@ import { AuthInterceptor } from './shared/auth.interceptor';
     ShoppingModule,
     AuthModule,
     SharedModule,
-    StoreModule.forRoot({shoppingList: shoppingListReducer}),
+    StoreModule.forRoot({
+      shoppingList: shoppingListReducer,
+      auth: authReducer
+      }),
     
   ],
   providers: [
