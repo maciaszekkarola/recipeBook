@@ -1,9 +1,10 @@
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-
+import { Observable } from 'rxjs/Observable';
 import * as ShoppingListActions from './../../shopping-list/store/shopping-list.actions';
 import * as fromApp from '../../../store/app.reducers';
+import * as fromAuth from '../../auth/store/auth.reducers'; 
 import { Recipe } from '../../../models/recipe.model';
 import { RecipeService } from '../../recipe-book/recipe-book.service';
 
@@ -15,7 +16,8 @@ import { RecipeService } from '../../recipe-book/recipe-book.service';
 export class RecipeDetailComponent implements OnInit {
     recipe: Recipe;
     id:  number;
-    
+    authState$: Observable<fromAuth.State>;
+    isAuthenticated: boolean;
     constructor (
                 private store: Store<fromApp.AppState>,
                 private recipeService: RecipeService,
@@ -23,6 +25,13 @@ export class RecipeDetailComponent implements OnInit {
                 private router: Router) {}
     
     ngOnInit() {
+        this.authState$ = this.store.select('auth');
+        this.authState$.subscribe(
+            (dataState) => {
+                this.isAuthenticated = dataState.authenticated
+                console.log(this.isAuthenticated);
+            }
+        )
         this.route.params
             .subscribe(
                 (params: Params) => {
@@ -40,13 +49,12 @@ export class RecipeDetailComponent implements OnInit {
 
     }
     onEditRecipe() {
-        // tutaj przyklad jak w headerze, dodaj observable 
-        // if (this.authService.isAuthenticated()) {
-        this.router.navigate(['edit'], {relativeTo: this.route})
-        // }else {
-            // this.router.navigate(['/signin'], {relativeTo: this.route});
+        if (this.isAuthenticated) {
+            this.router.navigate(['edit'], {relativeTo: this.route})
+        }else {
+            this.router.navigate(['/signin'], {relativeTo: this.route});
             
-        // }
+        }
     }
 
     onDeleteRecipe() {

@@ -1,3 +1,4 @@
+import { State } from './../auth/store/auth.reducers';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -40,6 +41,7 @@ export class HeaderComponent implements OnInit {
     //       console.log(response);
     //     }
     //   );  
+    
   }
 
   onFetchData() {
