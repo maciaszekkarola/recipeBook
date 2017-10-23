@@ -2,6 +2,7 @@ import { Store } from '@ngrx/store';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+
 import * as ShoppingListActions from './../../shopping-list/store/shopping-list.actions';
 import * as fromApp from '../../../store/app.reducers';
 import * as fromAuth from '../../auth/store/auth.reducers'; 
@@ -29,7 +30,6 @@ export class RecipeDetailComponent implements OnInit {
         this.authState$.subscribe(
             (dataState) => {
                 this.isAuthenticated = dataState.authenticated
-                console.log(this.isAuthenticated);
             }
         )
         this.route.params
@@ -51,7 +51,6 @@ export class RecipeDetailComponent implements OnInit {
             this.router.navigate(['edit'], {relativeTo: this.route})
         }else {
             this.router.navigate(['/signin'], {relativeTo: this.route});
-            
         }
     }
 

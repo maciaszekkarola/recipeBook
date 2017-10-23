@@ -31,7 +31,7 @@ export class AuthEffects {
             .auth().currentUser.getIdToken());
     })
     .mergeMap((token: string) => {
-        this.router.navigate( ['/'] , {relativeTo: this.route})
+        this.router.navigate( ['/']);
         return [
             {type: AuthActions.SIGNUP},
             {
@@ -56,7 +56,7 @@ export class AuthEffects {
             .auth().currentUser.getIdToken());
     })
     .mergeMap((token: string) => {
-        this.router.navigate( ['/'] , {relativeTo: this.route})
+        this.router.navigate( ['/']);
         return [
             {type: AuthActions.SIGNIN},
             {
@@ -66,10 +66,18 @@ export class AuthEffects {
         ]
     })
 
+    // super wazne by dac blokowanie dispatcha! ten effekt ma nie wysylac nic do store!
+    @Effect({dispatch: false})
+    authLogout = this.actions$
+    .ofType(AuthActions.LOGOUT)
+    .do( () => {
+        this.router.navigate( ['/']);
+    })
+
+
 
     constructor(private actions$: Actions,
-                private router: Router,
-                private route: ActivatedRoute) {}
+                private router: Router) {}
 }
 
 
