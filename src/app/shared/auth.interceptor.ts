@@ -1,6 +1,5 @@
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
-import { AuthService } from './../components/auth/auth.service';
 import { Observable } from 'rxjs/Observable';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import 'rxjs/add/operator/switchMap';

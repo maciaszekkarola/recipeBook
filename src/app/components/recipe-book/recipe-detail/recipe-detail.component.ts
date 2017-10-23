@@ -40,8 +40,6 @@ export class RecipeDetailComponent implements OnInit {
                     
                 }
             );
-
-
     }
 
     onAddToShoppingList() {
