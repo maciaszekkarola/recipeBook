@@ -2,7 +2,9 @@ import { Ingredient } from '../../../models/ingredient.model';
 import { Recipe } from '../../../models/recipe.model';
 import * as RecipeActions from './recipe.actions';
 import * as fromApp from '../../../store/app.reducers';
+
 // only in lazy loading!!
+// rozszerzam klasę o podstawowy AppState
 export interface FeatureState extends fromApp.AppState {
     recipes: State
 }
