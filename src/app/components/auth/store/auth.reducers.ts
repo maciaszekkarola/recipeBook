@@ -1,18 +1,14 @@
-import { Action } from '@ngrx/store';
+// import { Action } from '@ngrx/store';
 import * as AuthActions from './auth.actions';
 
 export interface State {
     token: string;
     authenticated: boolean;
-    username: string;
-    password: string;
 }
 
 const initialState: State = {
     token: null,
     authenticated: false,
-    username: null,
-    password: null
 }
 
 // w tym przypadku z racji ze czynnosc autektykacji jest powtarzalna moge wrzucic case pod case

@@ -1,6 +1,6 @@
 import { Ingredient } from './../../../models/ingredient.model';
 import { Action } from '@ngrx/store';
-import * as ShoppingListActions from 'app/components/shopping-list/store/shopping-list.actions';
+import * as ShoppingListActions from './shopping-list.actions';
 
 
 // tworzę State po to by za każdym razem kiedy 

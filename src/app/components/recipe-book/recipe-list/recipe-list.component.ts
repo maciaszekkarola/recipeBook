@@ -4,11 +4,12 @@ import { Subscription } from 'rxjs/Subscription';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Recipe } from '../../../models/recipe.model';
-import { RecipeService } from '../recipe-book.service';
 import unsubscriber from '../../../shared/unsubscriber';
 
 import * as fromApp from '../../../store/app.reducers';
 import * as fromAuth from '../../../components/auth/store/auth.reducers';
+import * as fromRecipe from '../store/recipe.reducers';
+
 import { Store } from '@ngrx/store';
 
 
@@ -22,27 +23,28 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   isAuthenticated = false;
   authState$: Observable<fromAuth.State>;
+  recipeState$: Observable<fromRecipe.State>;
   
-  constructor(private recipeService: RecipeService,
-              private router: Router,
+  constructor(private router: Router,
               private route: ActivatedRoute,
-              private store: Store<fromApp.AppState>) { }
+              private store: Store<fromApp.AppState>,
+              private storeRecipe: Store<fromRecipe.FeatureState>) {}
 
   ngOnInit() {
-    this.subscriptions.push(this.recipeService.recipesChanged
-    .subscribe(
-      (recipes: Recipe[]) => {
-        this.recipes = recipes;
-      }
-    ));
-    this.recipes = this.recipeService.getRecipes();
-
     this.authState$ = this.store.select('auth');
-    this.authState$.subscribe(
+    this.subscriptions.push(this.authState$.subscribe(
         (data) => {
           this.isAuthenticated = data.authenticated;
         }
-      )
+      ));
+
+    this.recipeState$ = this.storeRecipe.select('recipes'); 
+    this.subscriptions.push(this.recipeState$.subscribe(
+      (data) => {
+        this.recipes = data.recipes;
+      } 
+    )); 
+
   }
 
   ngOnDestroy() {
