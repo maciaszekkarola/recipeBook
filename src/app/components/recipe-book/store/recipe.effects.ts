@@ -1,8 +1,4 @@
 import { Store } from '@ngrx/store';
-<<<<<<< HEAD
-=======
-import { STORE_RECIPES, StoreRecipes } from './recipe.actions';
->>>>>>> 76b168b4d24f7c3a184e4584b50ec0cfba0fcb1c
 import { Injectable } from '@angular/core';
 import { Recipe } from './../../../models/recipe.model';
 import { HttpClient, HttpRequest } from '@angular/common/http';
@@ -38,11 +34,7 @@ export class RecipeEffects {
                 payload: recipes
             };
         }
-<<<<<<< HEAD
     );
-=======
-    )
->>>>>>> 76b168b4d24f7c3a184e4584b50ec0cfba0fcb1c
 
     @Effect({dispatch: false})
     recipeStore = this.actions$
