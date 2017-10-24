@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-// import { Recipe } from '../../../models/recipe.model';
 
 import * as ShoppingListActions from './../../shopping-list/store/shopping-list.actions';
 import * as fromApp from '../../../store/app.reducers';
@@ -20,7 +19,6 @@ export class RecipeDetailComponent implements OnInit {
     recipeState$: Observable<fromRecipe.State>;
     authState$: Observable<fromAuth.State>;
 
-    // recipe: Recipe[];
     id:  number;
     isAuthenticated: boolean;
 
@@ -42,11 +40,6 @@ export class RecipeDetailComponent implements OnInit {
                 (params: Params) => {
                     this.id = +params['id'];
                     this.recipeState$ = this.storeRecipe.select('recipes');
-                    // this.recipeState$.subscribe(
-                    //     (data) => {
-                    //         this.recipe = data.recipes;
-                    //     }
-                    // )
                 }
             );
     }
