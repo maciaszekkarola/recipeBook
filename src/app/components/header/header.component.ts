@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import * as fromApp from '../../store/app.reducers'; 
 import * as fromAuth from '../auth/store/auth.reducers'; 
 import * as AuthActions from '../auth/store/auth.actions'; 
+import * as RecipeActions from './../recipe-book/store/recipe.actions';
 
 @Component({
   selector: 'app-header',
@@ -29,24 +30,11 @@ export class HeaderComponent implements OnInit {
   }
 
   onSaveData() {
-    this.dataStorageService.storeRecipes()
-      .subscribe(
-        (response) => {
-          console.log(response);
-        }
-      );
-    // this.dataStorageService.storeShopingList()
-    //   .subscribe(
-    //     (response) => {
-    //       console.log(response);
-    //     }
-    //   );  
-    
+    this.store.dispatch(new RecipeActions.StoreRecipes());
   }
 
   onFetchData() {
-    this.dataStorageService.fetchRecipes();
-    this.dataStorageService.fetchShoppingList();
+    this.store.dispatch(new RecipeActions.FetchRecipes());
   }
 
   onLogout() {
