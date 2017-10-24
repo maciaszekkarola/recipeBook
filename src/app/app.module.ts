@@ -17,8 +17,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 
-import { DataStorageService } from './shared/data-storage.service';
-import { RecipeService } from './components/recipe-book/recipe-book.service';
 import { AuthGuard } from './components/auth/auth-guard.service';
 
 import { AuthInterceptor } from './shared/auth.interceptor';
@@ -46,8 +44,6 @@ import { LoggingInterceptor } from './shared/logging.interceptor';
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [
-    RecipeService, 
-    DataStorageService,
     AuthGuard,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true},
