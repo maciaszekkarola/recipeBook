@@ -40,7 +40,7 @@
             <li 
             class = "list-group-item" 
             *ngFor = "let ingredient of (recipeState$ | async).recipes[id].ingredients">
-                 {{ ingredient.name }} - {{ ingredient.amount }}
+                 {{ ingredient?.name }} - {{ ingredient?.amount }}
             </li>
         </ul>
     </div>
