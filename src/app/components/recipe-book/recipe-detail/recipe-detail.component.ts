@@ -1,3 +1,4 @@
+import { Recipe } from './../../../models/recipe.model';
 import { AppRoutingModule } from 'app/app-routing.module';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -21,6 +22,7 @@ export class RecipeDetailComponent implements OnInit {
 
     id:  number;
     isAuthenticated: boolean;
+    recipe: Recipe[];
 
     constructor (
                 private store: Store<fromApp.AppState>,
@@ -40,6 +42,11 @@ export class RecipeDetailComponent implements OnInit {
                 (params: Params) => {
                     this.id = +params['id'];
                     this.recipeState$ = this.storeRecipe.select('recipes');
+                    this.recipeState$.subscribe(
+                        (data) => {
+                            this.recipe = data.recipes;
+                        }
+                    )
                 }
             );
     }

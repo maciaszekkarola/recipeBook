@@ -13,9 +13,6 @@ import * as firebase from 'firebase';
 export class AuthEffects {
     @Effect()
 
-    // tslint:disable-next-line:max-line-length
-    // w ostatnim kroku uywam map by tablica obiektow krora otrzymam bylo od razu mozna przeksztalcic w Observable. a wlasciwie to mergeMap by zmegrowac wiece observabli w jeden
-    // w Pzypadku SwitchMap dane 
     authSignup = this.actions$
     .ofType(AuthActions.TRY_SIGNUP)
     .map((action: AuthActions.TrySignup) => {
@@ -66,7 +63,6 @@ export class AuthEffects {
         ]
     })
 
-    // super wazne by dac blokowanie dispatcha! ten effekt ma nie wysylac nic do store!
     @Effect({dispatch: false})
     authLogout = this.actions$
     .ofType(AuthActions.LOGOUT)

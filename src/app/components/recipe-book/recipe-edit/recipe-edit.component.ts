@@ -44,7 +44,6 @@ export class RecipeEditComponent implements OnInit {
           .take(1)
           .subscribe(
             (recipeState: fromRecipe.State) => {
-              // najpierw fetch recipe a potem operacje na przepisie
               const recipe = recipeState.recipes[this.id];
               recipeName = recipe.name; 
               recipeImgPath = recipe.imagePath;

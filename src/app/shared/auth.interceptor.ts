@@ -17,7 +17,6 @@ export class AuthInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         console.log(req);
 
-        // take(1) jest funkcj ktra powoduje ze wykona sie tylko raz! w tym przypadku ma to znaczenie to token za 
         return this.store.select('auth')
                 .take(1)
                 .switchMap((authState: fromAuth.State) => {
