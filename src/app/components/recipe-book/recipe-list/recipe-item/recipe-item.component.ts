@@ -28,7 +28,6 @@ import {
       transition('* => void', [
         animate(300, style({
           transform: 'translateX(100px)',
-          color: 'red',
           opacity: 0
           })
         )
