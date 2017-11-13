@@ -54,8 +54,5 @@ export class ShoppingListComponent implements OnInit {
   onEditIngr(index: number) {
     this.store.dispatch(new ShoppingListActions.StartEdit(index))
   }
-  animationStarted(event) {
-    console.log(event);
-  }
 
 }

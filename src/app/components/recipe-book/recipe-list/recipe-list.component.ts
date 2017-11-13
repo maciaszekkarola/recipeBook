@@ -16,7 +16,8 @@ import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
-  styleUrls: ['./recipe-list.component.css']
+  styleUrls: ['./recipe-list.component.css'],
+
 })
 export class RecipeListComponent implements OnInit, OnDestroy {
   recipes: Recipe[] ;
@@ -24,7 +25,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   authState$: Observable<fromAuth.State>;
   recipeState$: Observable<fromRecipe.State>;
-  
+
   constructor(private router: Router,
               private route: ActivatedRoute,
               private store: Store<fromApp.AppState>,
@@ -38,19 +39,19 @@ export class RecipeListComponent implements OnInit, OnDestroy {
         }
       ));
 
-    this.recipeState$ = this.storeRecipe.select('recipes'); 
+    this.recipeState$ = this.storeRecipe.select('recipes');
     this.subscriptions.push(this.recipeState$.subscribe(
       (data) => {
         this.recipes = data.recipes;
-      } 
-    )); 
+      }
+    ));
 
   }
 
   ngOnDestroy() {
     unsubscriber(this.subscriptions);
   }
-  
+
   onNewRecipe() {
     if (this.isAuthenticated) {
       this.router.navigate(['new'], {relativeTo: this.route});
@@ -59,5 +60,5 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     }
   }
 
-  
+
 }

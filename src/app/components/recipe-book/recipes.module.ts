@@ -27,8 +27,8 @@ import { RecipeEffects } from './store/recipe.effects';
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        RecipesRoutingModule, 
-        SharedModule, 
+        RecipesRoutingModule,
+        SharedModule,
         StoreModule.forFeature('recipes', recipeReducer),
         EffectsModule.forFeature([RecipeEffects])
       ],

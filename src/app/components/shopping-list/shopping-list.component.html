@@ -8,8 +8,7 @@
         style="cursor:pointer"
         *ngFor = "let ingredient of (shoppingListState$ | async).ingredients; let i=index"
         (click)="onEditIngr(i)"
-        [@addItem]="state"
-        (@addItem.start)="animationStarted($event)"
+        [@addItem]
         >
         {{ ingredient.name }} ({{ ingredient.amount }})
       </a>

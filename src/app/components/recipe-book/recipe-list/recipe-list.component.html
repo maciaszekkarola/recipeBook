@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-xs-12">
-        <button 
-            (click)="onNewRecipe()" 
+        <button
+            (click)="onNewRecipe()"
             class="btn btn-success">
                 New Recipe
         </button>
@@ -10,8 +10,8 @@
 <hr>
 <div class="row">
     <div class="col-xs-12 pre-scrollable" style="max-height: 70vh">
-        <app-recipe-item 
-            *ngFor="let recipeElement of (recipeState$ | async).recipes; let i = index" 
+        <app-recipe-item
+            *ngFor="let recipeElement of (recipeState$ | async).recipes; let i = index"
             [recipe] = "recipeElement"
             [index] = "i"
         ></app-recipe-item>
