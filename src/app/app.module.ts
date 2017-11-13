@@ -4,8 +4,8 @@ import { ShoppingModule } from './components/shopping-list/shopping.module';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from 'app/app-routing.module';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
@@ -33,6 +33,7 @@ import { LoggingInterceptor } from './shared/logging.interceptor';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     ShoppingModule,
@@ -47,7 +48,7 @@ import { LoggingInterceptor } from './shared/logging.interceptor';
     AuthGuard,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true},
-    
+
   ],
   bootstrap: [AppComponent]
 })

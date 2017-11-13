@@ -3,13 +3,15 @@
     <app-shopping-list-edit></app-shopping-list-edit>
     <hr>
     <ul class="list-group">
-      <a 
-        class="list-group-item" 
+      <a
+        class="list-group-item"
         style="cursor:pointer"
         *ngFor = "let ingredient of (shoppingListState$ | async).ingredients; let i=index"
         (click)="onEditIngr(i)"
-        > 
-        {{ ingredient.name }} ({{ ingredient.amount }}) 
+        [@addItem]="state"
+        (@addItem.start)="animationStarted($event)"
+        >
+        {{ ingredient.name }} ({{ ingredient.amount }})
       </a>
     </ul>
   </div>
